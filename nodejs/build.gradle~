@@ -1,0 +1,57 @@
+task transformConfig() { 
+println "current configuration $configuration"
+
+
+doLast {
+
+def process = ['nssm.exe', 'stop', "codesanook-frontend-$configuration"].execute()  
+process.waitFor()  
+println process.exitValue()  
+println process.in.text  
+println process.err.text  
+
+process = ["../external-tools/nant/nant.exe", "-D:configuration=$configuration" ].execute()  
+process.waitFor()  
+println process.exitValue()  
+println process.in.text  
+println process.err.text  
+
+
+copy {
+from "." 
+into "c:/wwwroot/codesanook-frontend-$configuration"
+}
+
+}
+
+}
+
+
+task restartService(dependsOn: 'transformConfig') {
+
+println "current configuration $configuration"
+
+doLast {
+def process = ['nssm.exe', 'start', "codesanook-frontend-$configuration"].execute()  
+process.waitFor()  
+println process.exitValue()  
+println process.in.text  
+println process.err.text  
+
+}
+
+}
+
+
+
+
+//def process = "cmd /c run-config.bat".execute()  
+
+
+
+
+
+
+
+
+

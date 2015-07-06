@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<project default="preBuild">
+
+	<property name="currentDir" value="${project::get-base-directory()}/"/>
+	<property name="username" value="${environment::get-user-name()}" overwrite="false" />
+	<property name="machineName" value="${environment::get-machine-name()}" overwrite="false" />
+
+	<include buildfile="${currentDir}Environments/VisualStudioConfigurations/${configuration}.properties" 
+		failonerror="true" if="${configuration != ''}" verbose="true"/>
+
+	<include buildfile="${currentDir}Environments/Machines/${machineName}.properties" 
+		failonerror="false" if="${machineName != ''}" verbose="true" />
+
+	<include buildfile="${currentDir}Environments/WindowsUsers/${username}.properties" 
+		failonerror="false" if="${username != ''}" verbose="true" />
+
+	<target name="preBuild">
+
+		<copy file="config-template.xml" tofile="config.xml" 
+			inputencoding="utf-8" outputencoding="utf-8" overwrite="true">
+			<filterchain>
+				<expandproperties />
+			</filterchain>
+		</copy>
+	</target>
+
+	<target name="PostBuild"> </target>
+</project>
