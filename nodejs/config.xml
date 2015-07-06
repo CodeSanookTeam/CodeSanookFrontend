@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <properties>
-	<property name="portNumber" value ="3030"/>
-	<property name="configuration" value ="production"/>
+	<property name="portNumber" value ="3000"/>
+	<property name="configuration" value ="development"/>
 </properties>
 
