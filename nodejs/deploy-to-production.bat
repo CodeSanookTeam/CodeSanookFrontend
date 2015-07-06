@@ -1,3 +1,5 @@
 echo off
-gradle restartService -Pconfiguration=production
+SET currentDir=%~dp0
+echo "current dir %currentDir%"
+gradle -b %currentDir%build.gradle restartService -Pconfiguration=production
 
