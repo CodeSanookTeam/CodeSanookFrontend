@@ -1,4 +1,4 @@
-var http = require('http');
+﻿var http = require('http');
 var fs = require('fs');
 var xmldoc = require('xmldoc');
 
@@ -13,7 +13,7 @@ var configuration = rootNode.childWithAttribute("name","configuration").attr.val
 
 //We need a function which handles requests and send response
 function handleRequest(request, response){
-    response.end('<h1> For Sci and You configuration = ' + configuration + ' </h1><iframe width="853" height="480" src="https://www.youtube.com/embed/Xd_whS596q0??autoplay=1" frameborder="0" allowfullscreen></iframe>');
+    response.end('<h1> เพื่อยูครับ configuration = ' + configuration + ' </h1><iframe width="853" height="480" src="https://www.youtube.com/embed/Xd_whS596q0??autoplay=1" frameborder="0" allowfullscreen></iframe>');
 }
 
 
