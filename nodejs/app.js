@@ -27,7 +27,7 @@ app.set('view engine', 'ejs');
 // index page
 app.get('/', function(req, res) {
     var model = {configuration : configuration};
-    res.render('pages/home',model );
+    res.render('pages/index',model );
 });
 
 //read more about path params

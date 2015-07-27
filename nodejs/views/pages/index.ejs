@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width" />
+    <title>CodeSanook</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/css/img/favicon.ico" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/webfontkit/stylesheet.css">
+    <script type="text/javascript" src="/js/100-jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="/js/101-bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/102-angular.min.js"></script>
+    <script type="text/javascript" src="/js/801-controllers.js"></script>
+    <script type="text/javascript" src="/js/802-services.js"></script>
+</head>
+<body ng-app="codeSanookControllers">
+<header class="container-fluid">
+    <a href="/" class="logo">Code#<span class="orange">Sanook</span></a>
+</header>
+<h3>
+    <%= configuration %>
+</h3>
+<section ng-controller="TopicCtrl">
+    <ul>
+        <li ng-repeat="topic in topics">
+            {{topic.title}}
+        </li>
+    </ul>
+    {{aaa}}
+</section>
+</body>
+</html>
