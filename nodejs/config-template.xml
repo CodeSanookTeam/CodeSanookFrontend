@@ -2,5 +2,6 @@
 <properties>
 	<property name="portNumber" value ="${portNumber}"/>
 	<property name="configuration" value ="${configuration}"/>
+	<property name="apiEndpoint" value ="${apiEndpoint}"/>
 </properties>
 
