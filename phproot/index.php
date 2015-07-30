@@ -10,13 +10,18 @@ date_default_timezone_set('Asia/Bangkok');
       var makeRequest  = function(data,method,url){
 
             var successCallback;
-            var errorCallback;
+	    var errorCallback; 
+
+	    var jsonData= {};
+	    if(data){
+	     jsonData = JSON.stringify(data);
+	    }
 
             $.ajax({
                 url: url,
                 async: false,
                 contentType: "application/json; charset=UTF-8",
-                data : JSON.stringify(data),
+                data :jsonData ,
                 type : method,
                 success: successCallback,
                 error : errorCallback
@@ -35,9 +40,13 @@ date_default_timezone_set('Asia/Bangkok');
 
 
         $("#btnMakeRequest").click(function(){
-            makeRequest({name: 'Sci'},"post", "http://dev.codesanook.com/cs/api.ashx/hello");
+            makeRequest({name: 'Sci'},"post", "http://dev.codesanook.com/cs/api.ashx/");
         });
 
+        $("#btnGetPostsRequest").click(function(){
+		makeRequest(null,"GET", 
+			"http://dev.codesanook.com/cs/api.ashx/posts/0/10?sort=desc");
+        });
 
 
         }); //end jQuery document ready
@@ -46,7 +55,11 @@ date_default_timezone_set('Asia/Bangkok');
 </head>
 <body>
 
+<p>
     <input type="button" id="btnMakeRequest" value=make request"/>
-
+</p>
+<p>
+    <input type="button" id="btnGetPostsRequest" value="make get posts request"/>
+</p>
 </body>
 </html>
