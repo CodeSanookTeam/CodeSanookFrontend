@@ -1,18 +1,23 @@
 // load the things we need
 var express = require('express');
 var app = express();
+var routeConfig = require('./routeConfig');
 
 var fs = require('fs');
 var xmldoc = require('xmldoc');
 
-var contents = fs.readFileSync( __dirname + '/config.xml').toString();
-console.log(contents)
-
-var rootNode = new xmldoc.XmlDocument(contents);
-var portNumber = rootNode.childWithAttribute("name","portNumber").attr.value; 
+var portNumber = getConfigValue("portNumber");
 console.log("portNumber " + portNumber);
 
-var configuration = rootNode.childWithAttribute("name","configuration").attr.value;
+var configuration = getConfigValue("configuration");
+var apiEndpoint =getConfigValue("apiEndpoint");
+
+function getConfigValue(configName){
+    var contents = fs.readFileSync( __dirname + '/config.xml').toString();
+    console.log(contents);
+    var rootNode = new xmldoc.XmlDocument(contents);
+    return rootNode.childWithAttribute("name",configName).attr.value;
+}
 
 
 //*********************** READ MORE ******************************//
@@ -27,7 +32,7 @@ app.set('view engine', 'ejs');
 // index page
 app.get('/', function(req, res) {
     var model = {configuration : configuration};
-    res.render('pages/home',model );
+    res.render('pages/index',model );
 });
 
 //read more about path params
@@ -39,6 +44,8 @@ app.get('/hello/:name', function(req, res) {
 app.get('/about', function(req, res) {
     res.render('pages/about');
 });
+
+routeConfig.registerRoute(app);
 
 //for static js/css/img
 app.use(express.static('public'));
