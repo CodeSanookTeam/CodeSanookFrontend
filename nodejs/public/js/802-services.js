@@ -288,8 +288,8 @@ codeSanookServices
 
             var req = {
                 method: 'GET',
-                url: 'http://pro.codesanook.com/cs/api.ashx/posts/'+pageIndex+'/'+itemsPerPage+'?sort=asc&api_key=special-key',
-                headers: getHeader()
+                url: 'http://dev.codesanook.com/cs/api.ashx/posts/'+pageIndex+'/'+itemsPerPage+'?sort=asc&api_key=special-key'//,
+                //headers: getHeader()
             };
             $http(req)
                 .success(function (result, status, headers, config) {
@@ -299,6 +299,35 @@ codeSanookServices
                 .error(function (result, status, headers, config) {
                     console.log("getAllTopics Failed Result: %o", result);
                     console.log("getAllTopics Failed Status: %o", status);
+                    deferred.reject();
+                });
+            promise.success = function (fn) {
+                promise.then(fn);
+                return promise;
+            };
+            promise.error = function (fn) {
+                promise.then(null, fn);
+                return promise;
+            };
+            return promise;
+        };
+
+        objReturn.getTags = function () {
+            var deferred = $q.defer();
+            var promise = deferred.promise;
+
+            var req = {
+                method: 'GET',
+                url: 'http://dev.codesanook.com/cs/api.ashx/tags?api_key=special-key'//,
+                //headers: getHeader()
+            };
+            $http(req)
+                .success(function (result, status, headers, config) {
+                    console.log("getTags Succeeded Result: %o", result);
+                    deferred.resolve(result);
+                })
+                .error(function (result, status, headers, config) {
+                    console.log("getTags Failed Result: %o", result);
                     deferred.reject();
                 });
             promise.success = function (fn) {

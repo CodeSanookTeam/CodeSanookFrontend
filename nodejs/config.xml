@@ -2,5 +2,6 @@
 <properties>
 	<property name="portNumber" value ="3000"/>
 	<property name="configuration" value ="development"/>
+	<property name="apiEndpoint" value ="dev.codesanook.com/cs"/>
 </properties>
 

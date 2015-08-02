@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width" />
     <title>CodeSanook</title>
-    <link rel="shortcut icon" type="image/x-icon" href="/css/img/favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon1.ico" />
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/webfontkit/stylesheet.css">
@@ -16,18 +16,40 @@
 </head>
 <body ng-app="codeSanookControllers">
 <header class="container-fluid">
-    <a href="/" class="logo">Code#<span class="orange">Sanook</span></a>
+    <a href="/" class="logo">Code#<span class="orange">Sanook</span></a> <%= configuration %>
 </header>
-<h3>
-    <%= configuration %>
-</h3>
-<section ng-controller="TopicCtrl">
-    <ul>
-        <li ng-repeat="topic in topics">
-            {{topic.title}}
-        </li>
-    </ul>
-    {{aaa}}
+<section class="container-fluid" ng-controller="TopicCtrl">
+    <div class="row">
+        <div class="col-sm-8">
+            <ul class="row topic">
+                <li class="col-sm-6" ng-repeat="topic in topics">
+                    <div class="previewImg">
+                        <a href="/{{topic.englishTitle}}"><img src="img/preview-img.jpg" /></a>
+                    </div>
+                    <div class="tags">
+                        <a ng-repeat="tag in topic.tags" href="/tag/{{tag}}">{{tag}}</a>
+                    </div>
+                    <div class="title">
+                        <h3 class="orange"><a href="/{{topic.englishTitle}}">{{topic.title}}</a></h3>
+                    </div>
+                    <div class="info">
+                        <a href="/author/{{topic.userName}}" class="author">
+                            <img src="img/author-amm.jpg" class="avatar" width="40" />
+                            <span class="userName">{{topic.userName}}</span>
+                        </a>
+                        <small class="date">{{topic.utcCreateDate| date:'d/MM/yyyy':timezone}}</small></div>
+                    <div class="desc defaultFont">{{topic.content | htmlToPlaintext | limitTo:250}}</div>
+                    <div class="more"><a href="/{{topic.englishTitle}}">Read more ></a></div>
+
+                </li>
+            </ul>
+        </div>
+        <div class="col-sm-4 tags">
+            <h2>TAGS</h2>
+            <a href="#" ng-repeat="tag in tags">{{tag.name}}</a>
+        </div>
+    </div>
+
 </section>
 </body>
 </html>
